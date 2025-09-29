@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}About Us - MediPredict{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
+  <div>
+    <h1 class="text-5xl font-bold text-gray-800">About Us</h1>
+    <p class="mt-6 text-gray-600 leading-relaxed">
+      MediPredict is dedicated to helping people better understand their health.
+      Our mission is to combine AI with medical knowledge to provide accurate and
+      helpful predictions for improved healthcare outcomes.
+    </p>
+  </div>
+  <div>
+    <img src="/static/1.png" alt="About Image" class="rounded-xl shadow-lg">
+  </div>
+</section>
+
+<!-- Who We Are -->
+<section class="bg-gray-50 py-16">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <img src="/static/2.png" alt="Who We Are" class="rounded-xl shadow-lg">
+    </div>
+    <div>
+      <h2 class="text-3xl font-semibold text-gray-800">Who We Are</h2>
+      <p class="mt-4 text-gray-600 leading-relaxed">
+        We are a team of passionate developers, data scientists, and healthcare experts 
+        focused on building AI-driven solutions. At MediPredict, we believe in the 
+        power of technology to transform the way people access and understand healthcare.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- What We Do -->
+<section class="py-16">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-semibold text-gray-800">What We Do</h2>
+    <div class="mt-10 grid sm:grid-cols-3 gap-8">
+      <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+        <img src="https://img.icons8.com/ios/50/000000/ai.png" alt="AI Icon" class="mx-auto mb-4">
+        <h3 class="font-bold text-lg text-gray-700">AI Predictions</h3>
+        <p class="text-gray-600 mt-2">We provide AI-powered predictions for health conditions based on symptoms.</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+        <img src="https://img.icons8.com/ios/50/000000/health-checkup.png" alt="Health Icon" class="mx-auto mb-4">
+        <h3 class="font-bold text-lg text-gray-700">Health Awareness</h3>
+        <p class="text-gray-600 mt-2">We spread awareness by educating people about diseases and precautions.</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+        <img src="https://img.icons8.com/ios/50/000000/customer-support.png" alt="Support Icon" class="mx-auto mb-4">
+        <h3 class="font-bold text-lg text-gray-700">24/7 Support</h3>
+        <p class="text-gray-600 mt-2">Our team is available around the clock to support users and answer queries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plan a Visit -->
+<section class="bg-gray-50 py-16">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+    <div class="bg-white p-8 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold text-gray-800">Plan a Visit</h3>
+      <p class="mt-4 text-gray-600">
+        Book an appointment with our healthcare experts and get personalized guidance.
+        Together, we aim to improve your health journey with MediPredict.
+      </p>
+      <button class="mt-6 px-6 py-3 bg-[#DC143C] text-white rounded-lg font-semibold hover:bg-red-600 transition">
+        Book Appointment
+      </button>
+    </div>
+    <div>
+      <img src="/static/6.png" alt="Plan a Visit" class="rounded-xl shadow-lg">
+    </div>
+  </div>
+
+  <!-- Icons -->
+  <div class="mt-16 grid sm:grid-cols-2 gap-8 text-center max-w-4xl mx-auto">
+    <div>
+      <img src="https://img.icons8.com/ios/50/000000/hospital-room.png" alt="Hospital Icon" class="mx-auto mb-4">
+      <h4 class="font-bold text-gray-700">Come On In</h4>
+      <p class="text-gray-600">Visit our partnered clinics for physical consultations.</p>
+    </div>
+    <div>
+      <img src="https://img.icons8.com/ios/50/000000/phone.png" alt="Phone Icon" class="mx-auto mb-4">
+      <h4 class="font-bold text-gray-700">Get in Touch</h4>
+      <p class="text-gray-600">Reach out to us anytime through phone or email for support.</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

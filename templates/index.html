@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Home - MediPredict{% endblock %}
+
+{% block content %}
+<div class="p-6 md:p-10 mx-[1rem] md:mx-[3rem] md:mt-[1rem]">
+  <div class="flex flex-col md:flex-row justify-between backdrop-blur-[6px] bg-white/10 border border-white/40 shadow-lg rounded-2xl p-6 md:p-10">
+    <div class="md:mx-[2rem] md:mt-[2rem] flex-1">
+      <h1 class="text-[2rem] font-bold text-[#1B3C53]">MediPredict</h1>
+      <p class="text-[#001F3F] text-[1rem] md:text-[1.2rem] leading-relaxed mt-[0.5rem] md:mt-[1rem]">
+        This is an AI-powered disease prediction system. By entering your
+        symptoms, the model predicts the most likely disease. Along with
+        the prediction, it also provides a detailed description of the
+        disease and the recommended precautions to stay safe.
+      </p>
+      <a href="/predict">
+        <button class="bg-red-600 mt-[1rem] md:mt-[2rem] hover:bg-red-700 text-white text-[1.1rem] font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300">
+          Predict Now
+        </button>
+      </a>
+    </div>
+    <div class="mt-6 md:mt-0 flex-1 flex justify-center items-center">
+      <img src="/static/3.png" class="max-w-full h-auto md:max-h-[20rem] lg:max-h-[25rem]" alt="AI Illustration" />
+    </div>
+  </div>
+</div>
+{% endblock %}

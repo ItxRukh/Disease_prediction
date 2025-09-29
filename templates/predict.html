@@ -1,0 +1,152 @@
+{% extends "base.html" %} {% block content %}
+
+<!-- Full Page Background with Gradient + Image -->
+<div
+  class="flex justify-center items-center h-[20rem] m-[5rem] px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat relative"
+  style="background-image: url('/static/images/medical-bg.jpg')"
+>
+  <!-- Gradient Overlay -->
+  <div
+    class="absolute inset-0 from-blue-200/70 via-indigo-200/70 to-purple-200/70 backdrop-blur-sm"
+  ></div>
+
+  <!-- Content Card -->
+  <div
+    class="relative w-full max-w-3xl bg-white/40 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-2xl p-6 sm:p-8 lg:p-10 transform transition-all duration-500 hover:scale-[1.01] hover:shadow-indigo-300/50"
+  >
+    <!-- Heading -->
+    <h1
+      class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center text-[#1B3C53] mb-3 sm:mb-4 drop-shadow-md animate-fade-in-down"
+    >
+      Enter Your Symptoms
+    </h1>
+    <p
+      class="text-center text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base animate-fade-in-up"
+    >
+      Enter your symptoms below and our AI model will predict the most likely
+      disease along with its details and precautions.
+    </p>
+
+    <!-- Symptoms Form -->
+    <form action="/result" method="POST" class="space-y-4 sm:space-y-6">
+      <div class="relative w-full animate-fade-in-up flex gap-2">
+        <input
+          type="text"
+          id="symptomInput"
+          name="symptoms"
+          placeholder="e.g. fever, headache, nausea"
+          class="flex-1 p-3 sm:p-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-gray-800 shadow-md bg-white/70 backdrop-blur-md transition duration-300 text-sm sm:text-base"
+          autocomplete="off"
+          required
+        />
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:from-pink-600 hover:via-red-600 hover:to-yellow-600 text-white text-base sm:text-lg font-bold py-3 px-6 rounded-xl shadow-xl transition duration-300 transform hover:scale-105 sm:hover:scale-110 hover:shadow-2xl"
+        >
+          🚀 Predict
+        </button>
+
+        <!-- Suggestions Dropdown -->
+        <ul
+          id="suggestions"
+          class="absolute bg-white/95 backdrop-blur-lg border border-gray-300 rounded-xl shadow-lg mt-14 w-[70%] hidden z-10 max-h-40 sm:max-h-48 overflow-y-auto transition-all duration-300 text-sm sm:text-base"
+        ></ul>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript for Suggestions -->
+
+<script>
+  const input = document.getElementById("symptomInput");
+  const suggestionBox = document.getElementById("suggestions");
+
+  input.addEventListener("input", async () => {
+    const query = input.value.split(",").pop().trim();
+    if (query.length < 2) {
+      suggestionBox.innerHTML = "";
+      suggestionBox.classList.add("hidden");
+      return;
+    }
+
+    try {
+      const res = await fetch(`/suggest?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+
+      suggestionBox.innerHTML = "";
+      data.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        li.className =
+          "p-2 hover:bg-indigo-100 hover:pl-4 cursor-pointer transition-all duration-200";
+
+        // suggestion choose karne ka kaam
+        li.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+
+          // pehle se likhe huye symptoms split karke lo
+          let current = input.value
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s);
+
+          // last incomplete word ko replace karo suggestion se
+          current[current.length - 1] = item;
+
+          input.value = current.join(", ") + ", ";
+          suggestionBox.innerHTML = "";
+          suggestionBox.classList.add("hidden");
+          input.focus();
+        });
+
+        suggestionBox.appendChild(li);
+      });
+
+      suggestionBox.classList.remove("hidden");
+    } catch (err) {
+      console.error("Error fetching suggestions:", err);
+    }
+  });
+
+  // Hide suggestions on outside click
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+      suggestionBox.classList.add("hidden");
+    }
+  });
+</script>
+
+<!-- Custom Animations -->
+<style>
+  @keyframes fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-down {
+    animation: fade-in-down 0.6s ease-out both;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out both;
+  }
+</style>
+
+{% endblock %}
